@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+build/
+dist/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+.tox/
+.nox/
+htmlcov/
+
+# Environments
+.venv/
+venv/
+ENV/
+.env
+
+# VSCode
+.vscode/
+
+# Output folders
+output/
+outputs/
+reports/
+results/
+data/generated/
+output/marts/
