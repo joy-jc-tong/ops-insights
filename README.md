@@ -1,40 +1,26 @@
 # Ops Insights
 
-Ops Insights simulates a manufacturing equipment event pipeline: generate events, run ETL, load a SQLite warehouse, and publish marts for analytics and BI.
+Ops Insights 是一個製造業設備營運分析的示範專案，  
+模擬設備事件資料的產生，透過 Python 執行 ETL，將資料載入 SQLite 資料倉儲，並產出可供分析與 BI 使用的 KPI marts。
 
-## What this project simulates
-- Manufacturing equipment event pipeline with Run/Down/Idle states
-- ETL that transforms raw events into daily KPIs and downtime summaries
+---
 
-## How to run
+## 本專案模擬的情境（What this project simulates）
+
+- 製造設備事件資料（Manufacturing equipment events）
+  - 狀態包含：Run / Down / Idle
+- 一個簡化但貼近實務的資料流程：
+  - Raw events → ETL → KPI marts → SQL analysis / Power BI dashboard
+- 常見營運指標（Operational KPIs）：
+  - Daily downtime
+  - Daily throughput (wafer out)
+  - Downtime by tool type / site
+
+---
+
+## 如何執行（How to run）
+
+一行指令即可產生資料並完成整個 pipeline：
+
 ```bash
 py -m src.main --generate-data --run-etl
-```
-
-## Output artifacts
-- `output/warehouse.db` (SQLite warehouse with `events` table)
-- `output/marts/mart_daily_kpi.csv`
-- `output/marts/mart_downtime_by_tooltype.csv`
-
-## SQL queries (in `sql/`)
-- `01_daily_downtime_by_site.sql`: Daily downtime minutes and Down counts by site
-- `02_downtime_by_tool_type.sql`: Total downtime by tool type (ranked)
-- `03_daily_throughput_by_site.sql`: Daily throughput and Run counts by site
-- `04_top_tools_by_downtime.sql`: Top 10 tools by downtime minutes
-
-## Power BI steps
-1. Import `output/marts/mart_daily_kpi.csv` and `output/marts/mart_downtime_by_tooltype.csv`.
-2. Build three visuals:
-   - Line chart: `date` vs `downtime_minutes`
-   - Clustered column: `site` vs `total_wafer_out`
-   - Bar chart: `tool_type` vs `downtime_minutes`
-3. Export and embed the dashboard screenshot:
-
-![Dashboard Screenshot](dashboard/dashboard_screenshot.png)
-
-## Mapping to job requirements
-- Python scripting: data generation, ETL orchestration
-- SQL queries: SQLite analysis under `sql/`
-- Power BI dashboard: marts consumption and visuals
-- Docker basics: containerization via `Dockerfile` and `docker-compose.yml`
-- Debugging/docs: logging and concise documentation
