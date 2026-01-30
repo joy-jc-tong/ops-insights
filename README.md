@@ -9,7 +9,7 @@ Ops Insights 是一個製造業設備營運分析的示範專案，
 
 - 製造設備事件資料（Manufacturing equipment events）
   - 狀態包含：Run / Down / Idle
-- 一個簡化但貼近實務的資料流程：
+- 資料流程：
   - Raw events → ETL → KPI marts → SQL analysis / Power BI dashboard
 - 常見營運指標（Operational KPIs）：
   - Daily downtime
